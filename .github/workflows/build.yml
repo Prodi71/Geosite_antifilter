@@ -1,7 +1,7 @@
 name: Build dlc.dat
 on:
   workflow_dispatch:
-  push:
+   push:
     branches:
       - master
     paths-ignore:
