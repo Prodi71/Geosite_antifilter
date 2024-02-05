@@ -31,6 +31,7 @@ jobs:
        -name: Download latest Antifilter domains
         run: |
           curl -o code/data/antifilter https://antifilter.download/list/domains.lst
+          mv ./data/domains.lst ./data/antifilter
           
       - name: Build dlc.dat file
         run: |
