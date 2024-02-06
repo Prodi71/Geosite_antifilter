@@ -20,7 +20,7 @@ jobs:
         with:
           path: code
 
-        - name: Setup Go
+      - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version-file: code/go.mod
@@ -31,7 +31,7 @@ jobs:
           echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         shell: bash
 
-       -name: Download latest Antifilter domains
+      -name: Download latest Antifilter domains
         run: |
           curl -o code/data/antifilter https://antifilter.download/list/domains.lst
           # mv ./data/domains.lst ./data/antifilter
