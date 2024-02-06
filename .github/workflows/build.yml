@@ -27,9 +27,9 @@ jobs:
           echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         shell: bash
 
-      -name: Download latest Antifilter domains
-        run: |
-          curl -o code/data/antifilter https://antifilter.download/list/domains.lst
+     # -name: Download
+     #  run: |
+     #     curl -o code/data/antifilter https://antifilter.download/list/domains.lst
                     
       - name: Build dlc.dat file
         run: |
