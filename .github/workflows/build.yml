@@ -1,14 +1,14 @@
 name: Build dlc.dat
 on:
   workflow_dispatch:
-   push:
+  push:
     branches:
       - master
     paths-ignore:
       - "**/README.md"
 jobs:
   build:
-    name: Build
+    name: Build project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase
@@ -27,7 +27,7 @@ jobs:
           echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         shell: bash
 
-       -name: Download latest Antifilter domains
+      -name: Download latest Antifilter domains
         run: |
           curl -o code/data/antifilter https://antifilter.download/list/domains.lst
                     
