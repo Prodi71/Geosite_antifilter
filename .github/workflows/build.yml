@@ -44,9 +44,9 @@ jobs:
       - name: Build geosite.dat file
         run: |
            #cd code || exit 1
-           go run ./ --outputdir=../  --outputname=geosite.dat --outputdir=../release --exportlists=antifilter, antifilter-community
+           go run ./ --outputdir=../  --outputname=geosite.dat --outputdir=release --exportlists=antifilter, antifilter-community
            #cd ../ && rm -rf code
-           cp ./geoip.dat release
+           cp geoip.dat release
      # - name: Generate geosite.dat sha256 hash
      #   run: |
      #   sha256sum geosite.dat > geosite.dat.sha256sum
