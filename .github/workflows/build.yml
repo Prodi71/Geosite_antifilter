@@ -1,13 +1,14 @@
 name: Build dlc.dat
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * *'  
   push:
     branches:
       - master
     paths-ignore:
       - "**/README.md"
-    schedule:
-    - cron: '0 7 * * *'    
+     
     
 jobs:
   build:
@@ -16,8 +17,8 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-        with:
-          path: code
+        #with:
+        # path: code
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -34,7 +35,7 @@ jobs:
       - name: Create data directory
         run: mkdir data
       
-      -name: Download latest Antifilter domains
+      -name: Get latest Antifilter domains
         run: |
           curl -sSL https://antifilter.download/list/domains.lst -o domains.txt  
           mv domains.txt data
@@ -42,7 +43,7 @@ jobs:
           mv domains_community.txt  data
           
                     
-      - name: Build dlc.dat file
+      - name: Build geosite.dat file
         run: |
           cd code || exit 1
           go run ./ --outputdir=../  --outputname=geosite.dat  --exportlists=antifilter, antifilter-community
