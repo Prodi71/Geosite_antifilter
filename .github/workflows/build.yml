@@ -29,8 +29,8 @@ jobs:
        
       - name: Create data directory
         run: mkdir data
-        run: mkdir data/antifilter
-        run: mkdir data/antifilter_community
+             mkdir data/antifilter
+             mkdir data/antifilter_community
       
       - name: Get latest Antifilter domains
         run: |
