@@ -1,4 +1,4 @@
-name: Build dlc.dat
+name: Build geosite.dat
 on:
   workflow_dispatch:
   schedule:
@@ -8,8 +8,6 @@ on:
       - master
     paths-ignore:
       - "**/README.md"
-     
-    
 jobs:
   build:
     name: Build
@@ -19,7 +17,6 @@ jobs:
         uses: actions/checkout@v4
         #with:
         # path: code
-
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -45,9 +42,9 @@ jobs:
                     
       - name: Build geosite.dat file
         run: |
-          cd code || exit 1
+          #cd code || exit 1
           go run ./ --outputdir=../  --outputname=geosite.dat  --exportlists=antifilter, antifilter-community
-          cd ../ && rm -rf code
+          #cd ../ && rm -rf code
 
       - name: Generate geosite.dat sha256 hash
         run: |
