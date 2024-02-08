@@ -25,6 +25,10 @@ jobs:
         run: |
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "RELEASE_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          
+      - name: Create release directory
+        run: mkdir release  
+      
         shell: bash
        
       #- name: Create data directory
