@@ -43,9 +43,9 @@ jobs:
            go run ./ --outputdir=../  --outputname=geosite.dat  --exportlists=antifilter, antifilter-community
            #cd ../ && rm -rf code
 
-      - name: Generate geosite.dat sha256 hash
-        run: |
-          sha256sum geosite.dat > geosite.dat.dat.sha256sum
+     # - name: Generate geosite.dat sha256 hash
+     #   run: |
+     #     sha256sum geosite.dat > geosite.dat.sha256sum
    
       - name: Git push assets to "release" branch
         run: |
