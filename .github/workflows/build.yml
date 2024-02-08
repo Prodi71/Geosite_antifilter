@@ -45,7 +45,7 @@ jobs:
 
      # - name: Generate geosite.dat sha256 hash
      #   run: |
-     #     sha256sum geosite.dat > geosite.dat.sha256sum
+     #   sha256sum geosite.dat > geosite.dat.sha256sum
    
       - name: Git push assets to "release" branch
         run: |
@@ -56,7 +56,7 @@ jobs:
           git add geosite.dat
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-          git push -f -u origin release
+          git push -f origin release
 
       - name: Release and upload assets
         run: |
