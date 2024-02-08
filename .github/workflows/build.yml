@@ -15,18 +15,16 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-        #with:
-        # path: code
-      - name: Setup Go
+
+      - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          cache: false       
-          go-version-file: code/go.mod
+          go-version-file: go.mod
 
       - name: Set variables
         run: |
-          echo "RELEASE_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
-          echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          echo "RELEASE_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
         shell: bash
        
       - name: Create data directory
