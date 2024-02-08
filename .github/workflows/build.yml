@@ -29,14 +29,16 @@ jobs:
        
       - name: Create data directory
         run: mkdir data
+        run: mkdir data/antifilter
+        run: mkdir data/antifilter_community
       
       - name: Get latest Antifilter domains
         run: |
           curl -sSL https://antifilter.download/list/domains.lst -o domains.txt  
-          mv domains.txt data
+          mv domains.txt data/antifilter
           curl -sSL https://community.antifilter.download/list/domains.lst -o domains_community.txt  
-          mv domains_community.txt  data
-                    
+          mv domains_community.txt  data/antifilter_community
+          
       - name: Build geosite.dat file
         run: |
            #cd code || exit 1
