@@ -5,7 +5,7 @@ on:
     - cron: '0 7 * * *'  
   push:
     branches:
-      - master
+    - master
     paths-ignore:
       - "**/README.md"
 jobs:
@@ -13,53 +13,53 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout codebase
-      uses: actions/checkout@v4
+      - name: Checkout codebase
+        uses: actions/checkout@v4
 
-    - name: Set up Go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: go.mod
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
 
-    - name: Set variables
-      run: |
+      - name: Set variables
+        run: |
         echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
         echo "RELEASE_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-      shell: bash
+        shell: bash
        
-    - name: Create data directory
-      run: mkdir data
+      - name: Create data directory
+        run: mkdir data
       
-    -name: Get latest Antifilter domains
-     run: |
+      - name: Get latest Antifilter domains
+        run: |
         curl -sSL https://antifilter.download/list/domains.lst -o domains.txt  
         mv domains.txt data
         curl -sSL https://community.antifilter.download/list/domains.lst -o domains_community.txt  
         mv domains_community.txt  data
                     
-     - name: Build geosite.dat file
-       run: |
-       #cd code || exit 1
-       go run ./ --outputdir=../  --outputname=geosite.dat  --exportlists=antifilter, antifilter-community
-       #cd ../ && rm -rf code
+       - name: Build geosite.dat file
+         run: |
+         #cd code || exit 1
+         go run ./ --outputdir=../  --outputname=geosite.dat  --exportlists=antifilter, antifilter-community
+         #cd ../ && rm -rf code
 
-      - name: Generate geosite.dat sha256 hash
-        run: |
-        sha256sum geosite.dat > geosite.dat.dat.sha256sum
+        - name: Generate geosite.dat sha256 hash
+          run: |
+          sha256sum geosite.dat > geosite.dat.dat.sha256sum
    
-      - name: Git push assets to "release" branch
-        run: |
-        git init
-        git config --local user.name "github-actions[bot]"
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git checkout -b release
-        git add *.txt *.sha256sum geosite.dat.dat
-        git commit -m "${{ env.RELEASE_NAME }}"
-        git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-        git push -f -u origin release
+        - name: Git push assets to "release" branch
+          run: |
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b release
+          git add *.txt *.sha256sum geosite.dat.dat
+          git commit -m "${{ env.RELEASE_NAME }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin release
 
-      - name: Release and upload assets
-        run: |
+        - name: Release and upload assets
+          run: |
           gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./geosite.dat.dat ./geosite.dat.dat.*
-        env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
