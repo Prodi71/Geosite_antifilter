@@ -32,9 +32,9 @@ jobs:
       - name: Get latest Antifilter domains
         run: |
           curl -sSL https://antifilter.download/list/domains.lst -o antifilter 
-          mv antifilter data
+          mv antifilter ./data
           curl -sSL https://community.antifilter.download/list/domains.lst -o community
-          mv community  data
+          mv community ./data
         shell: bash 
         
       - name: Build geosite.dat file
