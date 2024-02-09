@@ -35,16 +35,17 @@ jobs:
           mv antifilter data
           curl -sSL https://community.antifilter.download/list/domains.lst -o community
           mv community  data
-        shell: bash  
+        shell: bash 
+        
       - name: Build geosite.dat file
         run: |
-           #cd code || exit 1
+           cd code || exit 1
            go run ./  --outputdir=../ --exportlists=antifilter,community
            cd ../ && rm -rf code
            #cp ./geoip.dat release
-     # - name: Generate geosite.dat sha256 hash
-     #   run: |
-     #   sha256sum geosite.dat > geosite.dat.sha256sum
+      - name: Generate geosite.dat sha256 hash
+        run: |
+          sha256sum geosite.dat > geosite.dat.sha256sum
    
       - name: Git push assets to "release" branch
         run: |
