@@ -36,10 +36,10 @@ jobs:
       
       - name: Get latest Antifilter domains
         run: |
-          curl -sSL https://antifilter.download/list/domains.lst -o domains.txt  
-          mv domains.txt data/antifilter
-          curl -sSL https://community.antifilter.download/list/domains.lst -o domains_community.txt  
-          mv domains_community.txt  data/antifilter_community
+          curl -sSL https://antifilter.download/list/domains.lst -o antifilter 
+          mv antifilter data/antifilter
+          curl -sSL https://community.antifilter.download/list/domains.lst -o antifilter_community.txt  
+          mv antifilter_community  data/antifilter_community
           
       - name: Build geosite.dat file
         run: |
