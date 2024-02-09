@@ -38,7 +38,7 @@ jobs:
         run: |
           curl -sSL https://antifilter.download/list/domains.lst -o antifilter 
           mv antifilter data/antifilter
-          curl -sSL https://community.antifilter.download/list/domains.lst -o antifilter_community.txt  
+          curl -sSL https://community.antifilter.download/list/domains.lst -o antifilter_community
           mv antifilter_community  data/antifilter_community
           
       - name: Build geosite.dat file
@@ -57,7 +57,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git add *.dat
+          git add ./*.dat
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -u -f origin release
