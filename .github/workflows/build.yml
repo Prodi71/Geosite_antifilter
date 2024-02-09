@@ -32,7 +32,9 @@ jobs:
         shell: bash
        
       - name: Create data directory
-        run: mkdir data mkdir data/antifilter mkdir data/antifilter_community
+        run: mkdir data 
+             mkdir data/antifilter 
+             mkdir data/antifilter_community
       
       - name: Get latest Antifilter domains
         run: |
