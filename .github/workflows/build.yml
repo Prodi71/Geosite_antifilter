@@ -31,18 +31,17 @@ jobs:
                   
       - name: Get latest Antifilter domains
         run: |
-          curl -sSL https://antifilter.download/list/domains.lst -o antifilter 
-          mv antifilter ./data
-          curl -sSL https://community.antifilter.download/list/domains.lst -o community
-          mv community ./data
+          curl -o code/data/antifilter https://antifilter.download/list/domains.lst
+
         shell: bash 
         
       - name: Build geosite.dat file
         run: |
            cd code || exit 1
-           go run ./  --outputdir=../ --exportlists=antifilter,community
+           go run ./  --outputdir=../ --exportlists=antifilter
            cd ../ && rm -rf code
            #cp ./geoip.dat release
+           
       - name: Generate geosite.dat sha256 hash
         run: |
           sha256sum geosite.dat > geosite.dat.sha256sum
