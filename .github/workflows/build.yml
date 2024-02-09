@@ -44,7 +44,7 @@ jobs:
       - name: Build geosite.dat file
         run: |
            #cd code || exit 1
-           go run ./ --outputdir=./  --outputname=geosite.dat --outputdir=./ --exportlists=antifilter, antifilter-community
+           go run ./ --outputdir=../ --exportlists=antifilter,antifilter-community
            #cd ../ && rm -rf code
            #cp ./geoip.dat release
      # - name: Generate geosite.dat sha256 hash
@@ -57,7 +57,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git add geosite.dat
+          git add *.dat
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -u -f origin release
