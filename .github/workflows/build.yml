@@ -10,45 +10,36 @@ on:
       - "**/README.md"
 jobs:
   build:
-    name: Build
+    name: Build project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-
+        with:
+          path: code
+          
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version-file: code/go.mod
 
       - name: Set variables
         run: |
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
           echo "RELEASE_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          
-     #- name: Create release directory
-     #  run: mkdir release  
-      
-        shell: bash
        
-      - name: Create data directory
-        run: mkdir data
-             cd data
-             mkdir antifilter 
-             cd ../
-             mkdir antifilter_community
-      
+                  
       - name: Get latest Antifilter domains
         run: |
           curl -sSL https://antifilter.download/list/domains.lst -o antifilter 
-          mv antifilter data/antifilter
+          mv antifilter data
           curl -sSL https://community.antifilter.download/list/domains.lst -o community
-          mv community  data/antifilter_community
-          
+          mv community  data
+        shell: bash  
       - name: Build geosite.dat file
         run: |
            #cd code || exit 1
-           go run ./  --exportlists=antifilter,antifilter-community
+           go run ./  --outputdir=../ --exportlists=antifilter,community
            cd ../ && rm -rf code
            #cp ./geoip.dat release
      # - name: Generate geosite.dat sha256 hash
