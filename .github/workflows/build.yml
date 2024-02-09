@@ -35,6 +35,7 @@ jobs:
         run: mkdir data
              cd data
              mkdir antifilter 
+             cd ../
              mkdir antifilter_community
       
       - name: Get latest Antifilter domains
