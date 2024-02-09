@@ -45,7 +45,7 @@ jobs:
         run: |
            #cd code || exit 1
            go run ./  --exportlists=antifilter,antifilter-community
-           #cd ../ && rm -rf code
+           cd ../ && rm -rf code
            #cp ./geoip.dat release
      # - name: Generate geosite.dat sha256 hash
      #   run: |
