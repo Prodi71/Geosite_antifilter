@@ -32,14 +32,13 @@ jobs:
                   
       - name: Get latest Antifilter domains
         run: |
-          curl -sSL  https://community.antifilter.download/list/domains.lst -o antifilter.txt
-          mv antifilter.txt data
+          curl -sSL  https://community.antifilter.download/list/domains.lst -o antifilter
+          mv antifilter data
                     
         shell: bash 
         
       - name: Build geosite.dat file
         run: |
-           cd code || exit 1
            go run ./  --outputdir=../ --exportlists=antifilter 
            cd ../ && rm -rf code
            #cp ./geoip.dat release
