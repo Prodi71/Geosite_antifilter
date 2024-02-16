@@ -47,7 +47,9 @@ jobs:
       - name: Generate geosite.dat sha256 hash
         run: |
           sha256sum geosite.dat > geosite.dat.sha256sum
-                   
+      - name: List dist artifacts
+        run: ls -l /       
+      
       - name: Git push assets to "release" branch
         run: |
           git init
