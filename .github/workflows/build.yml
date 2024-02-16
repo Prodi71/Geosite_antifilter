@@ -30,10 +30,7 @@ jobs:
       
       - name: Create release directory
         run: mkdir code/data 
-      
-      - name: Create release directory
-        run: mkdir code/release
-      
+               
       - name: Get latest Antifilter domains
         run: |
           curl -sSL  https://community.antifilter.download/list/domains.lst -o antifilter
@@ -49,7 +46,6 @@ jobs:
            
       - name: Generate geosite.dat sha256 hash
         run: |
-          cd code || exit 1
           sha256sum geosite.dat > geosite.dat.sha256sum
                    
       - name: Git push assets to "release" branch
