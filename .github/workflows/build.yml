@@ -15,8 +15,7 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-        
-          
+            
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -40,14 +39,11 @@ jobs:
       - name: Build geosite.dat file
         run: |
            go run ./   --exportlists=antifilter 
+           cd ../ && rm -rf code
            
-           
-      - name: Generate sha256 checksum for dat files
+      - name: Generate dlc.dat sha256 hash
         run: |
-          cd ./output/dat || exit 1
-          for name in $(ls *.dat); do
-            sha256sum ${name} > ./${name}.sha256sum
-          done
+          sha256sum geosite.dat > geosite.dat.sha256sum
 
       - name: Move files to publish directory
         run: |
@@ -61,7 +57,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git add geosite.dat
+          git add geosite.dat *.sha256sum
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
