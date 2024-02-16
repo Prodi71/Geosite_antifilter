@@ -49,7 +49,7 @@ jobs:
            
       - name: Generate geosite.dat sha256 hash
         run: |
-          sha256sum ../geosite.dat > ../geosite.dat.sha256sum
+          sha256sum code/geosite.dat > code/geosite.dat.sha256sum
                    
       - name: Git push assets to "release" branch
         run: |
