@@ -32,7 +32,7 @@ jobs:
         run: mkdir code/data 
       
       - name: Create release directory
-        run: mkdir release
+        run: mkdir code/release
       
       - name: Get latest Antifilter domains
         run: |
