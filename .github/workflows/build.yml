@@ -15,12 +15,12 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-         with:
+        with:
           path: code
           
       - name: Set up Go
         uses: actions/setup-go@v5
-         with:
+        with:
           go-version-file: code/go.mod
 
       - name: Set variables
