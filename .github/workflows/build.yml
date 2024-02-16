@@ -15,11 +15,13 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v4
-            
+         with:
+          path: code
+          
       - name: Set up Go
         uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
+         with:
+          go-version-file: code/go.mod
 
       - name: Set variables
         run: |
@@ -38,23 +40,14 @@ jobs:
         
       - name: Build geosite.dat file
         run: |
+           cd code || exit 1
            go run ./   --exportlists=antifilter 
+           cd ../ && rm -rf code
            
-           
-      - name: Generate sha256 checksum for dat files
+      - name: Generate dlc.dat sha256 hash
         run: |
-          cd ./output/dat || exit 1
-          for name in $(ls *.dat); do
-            sha256sum ${name} > ./${name}.sha256sum
-          done
-
-      - name: Move files to publish directory
-        run: |
-          mkdir -p publish
-          mv ./output/dat/*.dat ./output/dat/*.sha256sum ./publish
-          #cp -fpPR ./output/text ./publish
-
-         
+          sha256sum geosite.dat > geosite.dat.sha256sum
+               
       - name: Git push assets to "release" branch
         run: |
           git init
