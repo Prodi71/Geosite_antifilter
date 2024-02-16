@@ -30,7 +30,10 @@ jobs:
       
       - name: Create release directory
         run: mkdir code/data 
-                  
+      
+      - name: Create release directory
+        run: mkdir release
+      
       - name: Get latest Antifilter domains
         run: |
           curl -sSL  https://community.antifilter.download/list/domains.lst -o antifilter
