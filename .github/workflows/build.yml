@@ -32,8 +32,7 @@ jobs:
       - name: Get latest Antifilter domains
         run: |
           curl -o code/data/community https://community.antifilter.download/list/domains.lst
-          curl -o code/data/antifilter https://antifilter.download/list/domains.lst
-
+          
         shell: bash 
         
       - name: Build geosite.dat file
