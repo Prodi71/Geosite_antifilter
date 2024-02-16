@@ -34,7 +34,7 @@ jobs:
       - name: Get latest Antifilter domains
         run: |
           curl -sSL  https://community.antifilter.download/list/domains.lst -o antifilter
-          mv antifilter data
+          mv antifilter code/data
                     
         shell: bash 
         
