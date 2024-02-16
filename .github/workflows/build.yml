@@ -46,7 +46,7 @@ jobs:
            
       - name: Generate geosite.dat sha256 hash
         run: |
-          sha256sum geosite.dat > geosite.dat.sha256sum
+          sha256sum geos.dat > geos.dat.sha256sum
                
       - name: Git push assets to "release" branch
         run: |
@@ -54,13 +54,13 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git add *.sha256sum geosite.dat
+          git add *.sha256sum geos.dat
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
 
       - name: Release and upload assets
         run: |
-          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ../geosite.dat ../geosite.dat.*
+          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./geos.dat ./geos.dat.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
