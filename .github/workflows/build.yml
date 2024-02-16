@@ -41,7 +41,7 @@ jobs:
            go run ./   --exportlists=antifilter 
            
            
-       - name: Generate sha256 checksum for dat files
+      - name: Generate sha256 checksum for dat files
         run: |
           cd ./output/dat || exit 1
           for name in $(ls *.dat); do
