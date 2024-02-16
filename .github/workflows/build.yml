@@ -45,12 +45,7 @@ jobs:
         run: |
           sha256sum geosite.dat > geosite.dat.sha256sum
 
-      - name: Move files to publish directory
-        run: |
-          mkdir -p publish
-          mv ./output/dat/*.dat ./output/dat/*.sha256sum ./publish
-          #cp -fpPR ./output/text ./publish
-   
+         
       - name: Git push assets to "release" branch
         run: |
           git init
