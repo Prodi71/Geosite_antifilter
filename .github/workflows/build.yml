@@ -40,8 +40,7 @@ jobs:
       - name: Build geosite.dat file
         run: |
            go run ./  --outputdir=./ --exportlists=antifilter 
-           cd ../ && rm -rf code
-           cp ./geoip.dat release
+           cp geoip.dat release
            
       - name: Generate geosite.dat sha256 hash
         run: |
