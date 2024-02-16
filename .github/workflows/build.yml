@@ -39,7 +39,7 @@ jobs:
         
       - name: Build geosite.dat file
         run: |
-           go run ./  --outputdir=../ --exportlists=antifilter 
+           go run ./  --outputdir=./ --exportlists=antifilter 
            cd ../ && rm -rf code
            #cp ./geoip.dat release
            
