@@ -10,7 +10,7 @@ on:
       - "**/README.md"
 jobs:
   build:
-    name: Build project
+    name: Build project geosite
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase
