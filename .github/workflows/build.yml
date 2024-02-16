@@ -41,10 +41,10 @@ jobs:
       - name: Build geosite.dat file
         run: |
            cd code || exit 1
-           go run ./   --exportlists=antifilter 
+           go run ./  --outputdir=../ --exportlists=antifilter 
            cd ../ && rm -rf code
            
-      - name: Generate dlc.dat sha256 hash
+      - name: Generate geosite.dat sha256 hash
         run: |
           sha256sum geosite.dat > geosite.dat.sha256sum
                
